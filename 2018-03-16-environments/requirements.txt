@@ -1,0 +1,3 @@
+notebook
+numpy
+-e git+https://github.com/jupyter/jupyter_client#egg=jupyter_client

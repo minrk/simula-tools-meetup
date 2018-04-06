@@ -1,0 +1,70 @@
+name: demo
+channels:
+- conda-forge
+- defaults
+dependencies:
+- blas=1.1=openblas
+- boost=1.66.0=py36_1
+- boost-cpp=1.66.0=1
+- bzip2=1.0.6=1
+- ca-certificates=2018.1.18=0
+- certifi=2018.1.18=py36_0
+- cmake=3.10.2=4
+- curl=7.55.1=0
+- eigen=3.3.3=0
+- expat=2.2.5=0
+- fastcache=1.0.2=py36_0
+- fenics=2017.2.0=np113py36_3
+- gmp=6.1.2=0
+- gmpy2=2.0.8=py36_1
+- hdf5=1.10.1=2
+- hypre=2.11.2=1
+- icu=58.2=0
+- krb5=1.14.2=0
+- libgfortran=3.0.0=0
+- libssh2=1.8.0=2
+- libuv=1.19.2=0
+- metis=5.1.0=3
+- mpc=1.0.3=4
+- mpfr=3.1.5=0
+- mpi=1.0=mpich
+- mpich=3.2.1=0
+- mpmath=1.0.0=py_0
+- mumps-mpi=5.0.2=blas_openblas_0
+- ncurses=5.9=10
+- numpy=1.13.3=py36_blas_openblas_201
+- openblas=0.2.20=7
+- openssl=1.0.2n=0
+- parmetis=4.0.3=0
+- pcre=8.41=1
+- petsc=3.8.3=blas_openblas_1
+- petsc4py=3.8.1=py36_1
+- pip=9.0.1=py36_1
+- pkg-config=0.29.1=2
+- ply=3.11=py36_0
+- ptscotch=6.0.4=5
+- python=3.6.4=0
+- readline=7.0=0
+- rhash=1.3.4=0
+- scalapack=2.0.2=1
+- scotch=6.0.4=4
+- setuptools=38.6.0=py36_0
+- six=1.11.0=py36_1
+- slepc=3.8.2=blas_openblas_0
+- slepc4py=3.8.0=py36_0
+- sqlite=3.20.1=2
+- suitesparse=4.5.4=blas_openblas_201
+- swig=3.0.12=2
+- sympy=1.1.1=py36_0
+- tbb=2018_20171205=0
+- tk=8.6.7=0
+- wheel=0.30.0=py36_2
+- xz=5.2.3=0
+- zlib=1.2.11=0
+- pip:
+  - fenics-dijitso==2017.2.0
+  - fenics-ffc==2017.2.0
+  - fenics-fiat==2017.2.0
+  - fenics-instant==2017.2.0
+  - fenics-ufl==2017.2.0
+prefix: /Users/minrk/conda/envs/demo
