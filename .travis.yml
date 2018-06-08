@@ -6,11 +6,15 @@ services:
 before_install:
   - curl -s https://get.fenicsproject.org | bash
 install:
-  - fenicsproject pull stable
+  - fenicsproject pull ${FENICS_IMAGE}
 script:
   - pytest 2018-04-20-tests/test.py
-  - fenicsproject run stable echo 'ok'
+  - fenicsproject run ${FENICS_IMAGE} echo 'ok'
 after_success:
   - echo 'yay!'
 after_failure:
   - pip list
+matrix:
+  env:
+    - FENICS_IMAGE=stable
+    - FENICS_IMAGE=dev
