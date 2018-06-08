@@ -2,4 +2,4 @@ language: python
 python:
   - "3.6"
 script:
-  - pytest
+  - pytest 2018-04-20-tests/test.py
