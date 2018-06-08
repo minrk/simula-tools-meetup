@@ -1,6 +1,16 @@
 language: python
 python:
   - "3.6"
-  - "2.7"
+services:
+  - docker
+before_install:
+  - curl -s https://get.fenicsproject.org | bash
+install:
+  - fenicsproject pull stable
 script:
   - pytest 2018-04-20-tests/test.py
+  - fenicsproject run stable echo 'ok'
+after_success:
+  - echo 'yay!'
+after_failure:
+  - pip list
