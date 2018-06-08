@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 
 
@@ -22,4 +23,4 @@ def test_simple_list():
 
 
 def test_something_else():
-    print(f"hello from ${sys.version}")
+    print("hello from {}".format(sys.version))
