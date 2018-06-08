@@ -1,3 +1,7 @@
+from __future__ import print_function
+import sys
+
+
 def mode(data):
     counts = {}
     for number in data:
@@ -16,3 +20,7 @@ def mode(data):
 def test_simple_list():
     data = [1, 2, 3, 4, 5, 2, 3, 3]
     assert mode(data) == 3
+
+
+def test_something_else():
+    print("hello from {}".format(sys.version))
