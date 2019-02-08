@@ -1,6 +1,19 @@
 language: python
 python:
   - "3.6"
-  - "2.7"
+env:
+  - FENICS_IMAGE=stable
+  - FENICS_IMAGE=dev
+services:
+  - docker
+before_install:
+  - curl -s https://get.fenicsproject.org | bash
+install:
+  - fenicsproject pull ${FENICS_IMAGE}
 script:
   - pytest 2018-04-20-tests/test.py
+  - fenicsproject run ${FENICS_IMAGE} echo 'ok'
+after_success:
+  - echo 'yay!'
+after_failure:
+  - pip list
