@@ -27,5 +27,6 @@ repos:
         stages: [commit]
         language: system
         entry: python -m mypy
+        files: list_adder, demo, tests
         types: [python]
         pass_filenames: false
