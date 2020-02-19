@@ -40,4 +40,3 @@ def add_lists(list1, list2):
         )
         raise ValueError(msg)
     return [add(x, y) for x, y in zip(list1, list2)]
-
