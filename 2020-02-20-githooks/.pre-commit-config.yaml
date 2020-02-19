@@ -21,7 +21,6 @@ repos:
         language: system
         entry: python -m flake8
         types: [python]
-        exclude: setup.py
 
       - id: mypy
         name: mypy
