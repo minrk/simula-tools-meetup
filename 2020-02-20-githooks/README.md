@@ -210,6 +210,13 @@ python3 -m mypy list_adder demo
 repos:
   - repo: local
     hooks:
+      - id: flake8
+        name: flake8
+        stages: [commit]
+        language: system
+        entry: python -m flake8
+        types: [python]
+
       - id: isort
         name: isort
         stages: [commit]
@@ -224,21 +231,12 @@ repos:
         entry: python -m black
         types: [python]
 
-      - id: flake8
-        name: flake8
-        stages: [commit]
-        language: system
-        entry: python -m flake8
-        types: [python]
-        exclude: setup.py
-
       - id: mypy
         name: mypy
         stages: [commit]
         language: system
         entry: python -m mypy
         types: [python]
-        pass_filenames: false
 
 ```
 
