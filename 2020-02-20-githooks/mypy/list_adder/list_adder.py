@@ -1,7 +1,7 @@
-from typing import Optional, List
+from typing import List, Optional
 
 
-def add(x: float, y: Optional[float] = 1) -> float:
+def add(x: float, y: Optional[float] = None) -> float:
     """Add two numbers
 
     Arguments
@@ -16,6 +16,8 @@ def add(x: float, y: Optional[float] = 1) -> float:
     float
         The sum of x and y
     """
+    if y is None:
+        y = 1
     return float(x + y)
 
 
@@ -41,4 +43,3 @@ def add_lists(lst1: List[float], lst2: List[float]) -> List[float]:
         )
         raise ValueError(msg)
     return [add(x, y) for x, y in zip(lst1, lst2)]
-

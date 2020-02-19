@@ -18,7 +18,7 @@ Things you might want to test whenever you commit
 
 ## Example code to illustrate pre-commit hooks
 
-A sample of code is found in the folder [`list_adder`](list_adder). This is really a dummy example just to be used for illustrating pre-commit hooks (do not use this code for anythig else :))
+A sample of code is found in the folder [`list_adder`](list_adder). This is really a dummy example just to be used for illustrating pre-commit hooks (do not use this code for anything else :))
 
 ### Install
 
@@ -28,7 +28,7 @@ Make sure you what `virtualenv` installed
 [sudo] python -m pip install virtualenv
 ```
 
-Create a virtual enviroment
+Create a virtual environent
 
 ```
 python -m virtualenv venv
@@ -113,6 +113,22 @@ Note: you can remove the pre-commit hook by executing
 pre-commit uninstall
 ```
 
+## Do not run pre-commit hook
+
+You can choose not to run the pre-commit hook when comitting by passing the flag `--no-verify` to the `git commit` command, i.e
+
+```
+git commit -m "Do not use pre-commit hooks` --no-verify
+```
+
+## More info about githooks
+
+https://pre-commit.com
+
+```
+man githooks
+```
+
 ## Coding style using `black` formatter
 
 ```
@@ -143,7 +159,7 @@ Autoformat code
 python -m black script.py
 ```
 
-or just check consisten import order
+or just check consistent import order
 
 ```
 python -m black --check script.py
@@ -156,7 +172,7 @@ You can add types to variables and run `mypy` to verify that you are always pass
 ```python
 from typing import Optional
 
-def add(x: float, y: Optional[float] = 1) -> float:
+def add(x: float, y: Optional[float] = None) -> float:
     """Add two numbers
 
     Arguments
@@ -171,6 +187,8 @@ def add(x: float, y: Optional[float] = 1) -> float:
     float
         The sum of x and y
     """
+    if y is None:
+        y = 1
     return float(x + y)
 ```
 
