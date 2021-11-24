@@ -192,9 +192,9 @@ Try to encrypt the following message `"Hello"`
 * In `pytest` we can use `pytest-cov` (`python -m pip install pytest-cov`)
 * Now run `pytest` with the command `--cov`
 
-```
-python -m pytest test_caesar_cipher.py --cov
-```
+    ```
+    python -m pytest test_caesar_cipher.py --cov
+    ```
 
 ---
 
