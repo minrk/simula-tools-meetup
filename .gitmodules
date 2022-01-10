@@ -1,3 +1,6 @@
 [submodule "2021-12-06-github-actions"]
 	path = 2021-12-06-github-actions
 	url = https://github.com/finsberg/2021-12-06-github-actions
+[submodule "2022-01-10-github-pages/2022-01-10-github-pages/github-pages-tutorial"]
+	path = 2022-01-10-github-pages/github-pages-tutorial
+	url = https://github.com/ComputationalPhysiology/github-pages-tutorial.git
