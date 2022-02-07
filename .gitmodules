@@ -4,3 +4,6 @@
 [submodule "2022-01-10-github-pages/2022-01-10-github-pages/github-pages-tutorial"]
 	path = 2022-01-10-github-pages/github-pages-tutorial
 	url = https://github.com/ComputationalPhysiology/github-pages-tutorial.git
+[submodule "2022-02-07-streamlit"]
+	path = 2022-02-07-streamlit
+	url = https://github.com/finsberg/streamlit-demo.git
