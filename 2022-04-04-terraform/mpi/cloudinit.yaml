@@ -1,0 +1,74 @@
+#cloud-config
+users:
+  - name: ${ user }
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${ indent(6, ssh_public_key) }
+runcmd:
+  - touch /etc/touchme-start
+  # fix permissions on files dropped in /home/user
+  - "chown -R ${ user }:${ user } /home/${ user }"
+
+  - mkdir -p ${nfs_mount_point}
+  %{ if rank == 0 }
+  - mkdir ${nfs_mount_point}/profile
+  - chown -R ${ user } ${nfs_mount_point}
+  - systemctl enable nfs-server
+  - systemctl start nfs-server
+  - exportfs -a
+  %{ else }
+  # mounts doesn't seem to support nfs, call explicitly
+  - mount -t nfs -o auto ${root_ip}:${nfs_mount_point} ${nfs_mount_point}
+  %{ endif }
+  # install conda
+  - curl -L -o mambaforge.sh https://github.com/conda-forge/miniforge/releases/download/4.12.0-0/Mambaforge-4.12.0-0-Linux-x86_64.sh
+  - bash mambaforge.sh -b -p /opt/conda
+  - /opt/conda/bin/mamba install -y mpich mpi4py ipyparallel jupyterlab
+  - touch /etc/touchme-done
+
+write_files:
+  # this should use our subnet mask, but I don't know how to get it
+  %{ if rank == 0 }
+  - content: |
+      ${nfs_mount_point} *(rw,sync,no_root_squash,no_all_squash)
+    path: /etc/exports
+
+  - content: |
+      ${ indent(6, ipcontroller_config_py) }
+    path: ${nfs_mount_point}/profile/ipcontroller_config.py
+
+  - content: |
+      ${ indent(6, ipcluster_config_py) }
+    path: ${nfs_mount_point}/profile/ipcluster_config.py
+
+  - content: |
+      ${ indent(6, machinefile) }
+    path: ${nfs_mount_point}/machinefile
+
+  - content: |
+      Host *.internal
+        StrictHostKeyChecking accept-new
+    permissions: "0600"
+    path: "/home/${ user }/.ssh/config"
+
+  - content: |
+      ${ indent(6, ssh_private_key) }
+    permissions: "0600"
+    path: "/home/${ user }/.ssh/id_rsa"
+
+  %{ endif }
+
+  - content: |
+      if [ -f /opt/conda/etc/profile.d/conda.sh ]; then
+        source /opt/conda/etc/profile.d/conda.sh
+        conda activate base
+      fi
+    permissions: "0755"
+    path: "/etc/profile.d/conda.sh"
+
+  - content: |
+      ${ user }      soft       nproc     100000
+      ${ user }      hard       nproc     100000
+      ${ user }      soft       nofile    65535
+      ${ user }      hard       nofile    65535
+    path: "/etc/security/limits.d/99-mpi.conf"
