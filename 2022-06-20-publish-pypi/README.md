@@ -1,8 +1,8 @@
 # Publish you package to PyPi
 
-In other to make it easier for others to install your software you can upload you package to [pypi](https://pypi.org). That want you can `pip` install your package.
+In other to make it easier for others to install your software you can upload your package to [pypi](https://pypi.org). That way you can `pip` install your package.
 
-We will try to add a new package to pypi, namely [`pyscholar`](https://github.com/finsberg/pyscholar) which is a side-project I have for extracting statistics from google scholar.
+We will try to add a new package to pypi, namely [`pyscholar`](https://github.com/finsberg/pyscholar) which is a side-project I have created for extracting statistics from google scholar.
 
 All the information you need can be found in the [python documentation](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
@@ -17,12 +17,11 @@ python -m pip install pyscholar
 ---
 ## Step 1: Make your package installable
 
-You need structure your code in a certain way in order to make it possible to install. For example you might have a `setup.py` and then you can run
+You need to structure your code in a certain way in order to make it possible to install. You would like to be able to run
 ```
 python -m pip install .
 ```
-inside the root directory in order to install it.
-In order to do this you can
+inside the root directory in order to install it. In order to do this you can
 - read the [python documentation](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 - use an existing project that you know work and modify that to you use-case
 - use a [cookiecutter template](https://cookiecutter.readthedocs.io/en/stable/README.html). See [this blog](https://pycon.switowski.com/03-project-structure-2-parts/cookiecutter/) for an example.
@@ -31,12 +30,13 @@ In order to do this you can
 
 ## Step 2: Create an account on pypi
 In order to upload your package to pypi you need to create an account there first. 
+You would also need to set up a token that you will use when uploading the package, see [here](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#uploading-your-project-to-pypi)
 
 ---
 
 ## Step 3: Build source distribution and wheels
 
-Now we need to create the files that should be uploaded to pypi. These are typically a wheel and a source distributions.
+Now we need to create the files that should be uploaded to pypi. These are typically a wheel and a source distribution.
 
 First install `build`
 ```
@@ -64,14 +64,15 @@ twine upload dist/*
 
 ## Extra
 
-### Tag and update version automatically using `bump2version`
-In stead of manually updating the version in the `setup.cfg` and creating the `tag` you can use a tool like [`bump2version`](https://pypi.org/project/bump2version/) to do this.
-
 ### Set up github actions to publish your wheels when there is a new release / tag
 
 There is a whole sections about this at the [python docs](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
 
 You can also see a working example [here](https://github.com/ComputationalPhysiology/simcardems/blob/master/.github/workflows/main.yml)
+
+
+### Tag and update version automatically using `bump2version`
+In stead of manually updating the version in the `setup.cfg` and creating the `tag` you can use a tool like [`bump2version`](https://pypi.org/project/bump2version/) to do this.
 
 
 ### If your package compiles code
