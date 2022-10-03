@@ -1,0 +1,9 @@
+
+pandas
+
+matplotlib
+
+seaborn
+
+--no-binary=h5py
+h5py
