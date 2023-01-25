@@ -1,0 +1,54 @@
+# original: https://github.com/conda-forge/pyzmq-feedstock/blob/main/recipe/meta.yaml
+{% set version = "25.0.0" %}
+
+package:
+  name: pyzmq
+  version: {{ version }}
+
+source:
+  # We use the pypi URL as it includes the prepared Cython files.
+  url: https://pypi.io/packages/source/p/pyzmq/pyzmq-{{ version }}.tar.gz
+  sha256: f330a1a2c7f89fd4b0aa4dcb7bf50243bf1c8da9a2f1efc31daf57a2046b31f2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - pkg-config  # [not win]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - python
+    - packaging
+    - pip
+    - zeromq
+    - libsodium
+  run:
+    - python
+    - zeromq
+    - libsodium
+
+test:
+  imports:
+    - zmq
+    - zmq.backend.cython.socket  # [python_impl == 'cpython']
+    - zmq.backend.cffi           # [python_impl == 'pypy']
+    - zmq.devices.monitoredqueue
+
+  requires:
+    - pip
+    - pytest
+    - setuptools
+
+  commands:
+    - pip check
+    - py.test --pyargs zmq.tests.test_socket
+
+about:
+  home: https://github.com/zeromq/pyzmq
+  summary: Python bindings for zeromq
+  license: BSD-3-Clause AND LGPL-3.0-or-later
+  license_file:
+    - COPYING.BSD
+    - COPYING.LESSER
