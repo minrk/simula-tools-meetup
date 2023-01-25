@@ -1,0 +1,49 @@
+# original: https://github.com/conda-forge/zeromq-feedstock/blob/main/recipe/meta.yaml
+{% set name = "zeromq" %}
+{% set version = "4.3.4" %}
+{% set sha256 = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/zeromq/libzmq/releases/download/v{{ version }}/zeromq-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 1
+  run_exports:
+    - {{ pin_subpackage(name, max_pin='x.x') }}
+
+requirements:
+  build:
+    - autoconf                     # [unix]
+    - automake                     # [unix]
+    - make                         # [unix]
+    - cmake                        # [win]
+    - libtool                      # [unix]
+    - pkg-config                   # [unix]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - libsodium
+  run:
+    - libsodium
+
+test:
+  commands:
+    - test ! -f ${PREFIX}/lib/libzmq.a       # [unix]
+    - test -f ${PREFIX}/lib/libzmq.so        # [linux]
+    - test -f ${PREFIX}/lib/libzmq.so.5      # [linux]
+    - test -f ${PREFIX}/lib/libzmq.dylib     # [osx]
+    - test -f ${PREFIX}/lib/libzmq.5.dylib   # [osx]
+    # verify libsodium is linked
+    - otool -L ${PREFIX}/lib/libzmq.dylib | grep sodium  # [osx]
+    - ldd ${PREFIX}/lib/libzmq.so | grep sodium  # [linux]
+
+about:
+  home: http://zeromq.org
+  license: LGPL-3.0-or-later
+  license_file: COPYING.LESSER
+  summary: A high-performance asynchronous messaging library.

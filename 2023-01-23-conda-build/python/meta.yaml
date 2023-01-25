@@ -1,0 +1,39 @@
+# original: https://github.com/conda-forge/wurlitzer-feedstock/blob/main/recipe/meta.yaml
+{% set name = "wurlitzer" %}
+{% set version = "3.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 224f5fe70618be3872c05dfddc8c457191ec1870654596279fcc1edadebe3e5b
+
+build:
+  number: 0
+  # noarch: python
+  script: python -m pip install -v --no-deps .
+
+requirements:
+  host:
+    - python >=3.5
+    - pip
+  run:
+    - python >=3.5
+
+test:
+  requires:
+    - pip
+    - pytest
+  imports:
+    - wurlitzer
+  commands:
+    - pip check
+
+about:
+  home: https://github.com/minrk/wurlitzer
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Capture C-level stdout/stderr in Python
